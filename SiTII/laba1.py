@@ -1,1 +1,3 @@
-print(2)
+name = 'Nikolay'
+print(name)
+
