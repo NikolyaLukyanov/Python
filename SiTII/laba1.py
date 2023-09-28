@@ -19,3 +19,5 @@ def my_name(name):
 my_name('Nikolay')
 
 my_list = [1, 2, 3]
+name = 'Nikolay'
+print(name)
