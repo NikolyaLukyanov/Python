@@ -4,6 +4,7 @@ my_otdels = "Отдел-1:182,230,204,219,161,218,196,161,228,202,164,189,178,24
 my_otdels = my_otdels.split(';')
 
 for my_otdel in my_otdels:
+    data = []
     my_otdel = ''.join(char for char in my_otdel if char != "'")
     my_otdel = my_otdel.split(':')
     name_otdel = my_otdel[0]
@@ -11,7 +12,8 @@ for my_otdel in my_otdels:
     electricity_consumptions = electricity_consumptions.split(',')
     electricity_consumptions = [int(item) for item in electricity_consumptions]
     for electricity_consumption in electricity_consumptions:
-        big_consumption = [i for i in electricity_consumptions if i > mean(electricity_consumptions)]
-        big_consumption = ','.join(map(str, big_consumption))
-    print("В отделе", name_otdel, "высокое потребление в дни: ", big_consumption, ". Среднее потребление: ", mean(electricity_consumptions))
+        if electricity_consumption > mean(electricity_consumptions):
+            index = electricity_consumptions.index(electricity_consumption)
+            data.append(index + 1)
 
+    print("В отделе", name_otdel, "высокое потребление в дни: ", str(data).strip('[]'), ". Среднее потребление: ", mean(electricity_consumptions))
