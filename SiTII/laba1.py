@@ -14,3 +14,4 @@ for my_otdel in my_otdels:
         big_consumption = [i for i in electricity_consumptions if i > mean(electricity_consumptions)]
         big_consumption = ','.join(map(str, big_consumption))
     print("В отделе", name_otdel, "высокое потребление в дни: ", big_consumption, ". Среднее потребление: ", mean(electricity_consumptions))
+
