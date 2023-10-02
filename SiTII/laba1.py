@@ -1,5 +1,3 @@
-from statistics import mean
-
 my_departments = """Отдел-1:182,230,204,219,161,218,196,161,228,202,164,189,178,240,205,200,153,191,183,231;Отдел-2:236,
 213,222,185,163,207,187,163,167,172,193,168,231,218,248,184,174,237,246,188;Отдел-3:248,194,175,170,215,171,157,248,
 165,213,208,184,175,205,236,194,151,156,183,225;Отдел-4:186,230,169,220,166,234,217,243,233,211,207,227,246,164,217,
@@ -19,8 +17,8 @@ for my_department in my_departments:
     electric_consums = electric_consums.split(',')
     electric_consums = [int(item) for item in electric_consums]
     for index, electric_consum in enumerate(electric_consums):
-        if electric_consum > mean(electric_consums):
+        if electric_consum > sum(electric_consums) / len(electric_consums):
             data.append(index + 1)
 
     print("В отделе", name_department, "высокое потребление в дни: ", str(data).strip('[]'), ". Среднее потребление: ",
-          mean(electric_consums))
+          sum(electric_consums) / len(electric_consums))
