@@ -18,9 +18,8 @@ for my_department in my_departments:
     electric_consums = my_department[1]
     electric_consums = electric_consums.split(',')
     electric_consums = [int(item) for item in electric_consums]
-    for electric_consum in electric_consums:
+    for index, electric_consum in enumerate(electric_consums):
         if electric_consum > mean(electric_consums):
-            index = electric_consums.index(electric_consum)
             data.append(index + 1)
 
     print("В отделе", name_department, "высокое потребление в дни: ", str(data).strip('[]'), ". Среднее потребление: ",
