@@ -14,8 +14,8 @@ for my_department in my_departments:
     my_department = my_department.split(':')
     electric_consums = my_department[1].split(',')
     electric_consums = [int(item) for item in electric_consums]
-    for index, electric_consum in enumerate(electric_consums):
+    for index, electric_consum in enumerate(electric_consums, start=1):
         if electric_consum > sum(electric_consums) / len(electric_consums):
-            data.append(index + 1)
+            data.append(index)
     print("В отделе", my_department[0], "высокое потребление в дни: ", str(data).strip('[]'), ". Среднее потребление: ",
           sum(electric_consums) / len(electric_consums))
