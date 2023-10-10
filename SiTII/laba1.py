@@ -6,7 +6,6 @@ def my_split(my_departments):
     """
     my_departments = my_departments.split(';')
     for my_department in my_departments:
-        data = []
         my_department = my_department.split(':')
         electric_consums = my_department[1].split(',')
         my_analiz(my_department, electric_consums)
