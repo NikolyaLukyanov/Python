@@ -10,7 +10,6 @@ my_departments = my_departments.split(';')
 
 for my_department in my_departments:
     data = []
-    my_department = ''.join(char for char in my_department if char != "'")
     my_department = my_department.split(':')
     electric_consums = my_department[1].split(',')
     electric_consums = [int(item) for item in electric_consums]
