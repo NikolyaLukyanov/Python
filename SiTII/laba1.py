@@ -11,20 +11,25 @@ def my_split(my_departments):
         my_analiz(my_department, electric_consums)
 
 
-def my_analiz(my_department, electric_consums):
+def my_analiz(
+        my_department: list[str],
+        electric_consums: list
+) -> str:
     """Анализируем входящий список и выводим результат
-
+    restructuredText
     Args:
         my_department (list): Список в виде списка, состоящий из названия отдела и показаний
+
         electric_consums (list): Список показаний в одном отделе
     """
     data = []
     electric_consums = [int(item) for item in electric_consums]
+    avg = sum(electric_consums) / len(electric_consums)
     for index, electric_consum in enumerate(electric_consums, start=1):
-        if electric_consum > sum(electric_consums) / len(electric_consums):
+        if electric_consum > avg:
             data.append(index)
     print("В отделе", my_department[0], "высокое потребление в дни: ", str(data).strip('[]'), ".\nСреднее потребление: ",
-          sum(electric_consums) / len(electric_consums))
+          avg)
 
 
 my_split("Отдел-1:182,230,204,219,161,218,196,161,228,202,164,189,178,240,205,200,153,191,183,231;"
