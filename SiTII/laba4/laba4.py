@@ -25,26 +25,30 @@ df = pd.read_csv('incidents.csv')
 # data.to_csv('data.csv')
 
 
-#  задание 3
-#
-# import requests
-#
-# API_URL = 'https://d5d9e0b83lurt901t9ue.apigw.yandexcloud.net'
-#
-#
-#  в инцидентах, имеющих несколько ассетов ассеты не разделяются, т.к. с точки зрения предметной области разумно выделить в отдельную категорию инциденты, затрагивающие несколько типов систем сразу
-# def get_assets_os(assets_id):
-#     assets_os = set()
-#     for asset_id in assets_id.split(','):
-#         assets_os.add(requests.get(f'{API_URL}/get-asset-by-id', params={'asset-id': asset_id}).json().get('result', {}).get('os'))
-#     return str(assets_os)
-#
-# # to reduce requests count
-# test_df = df.head(100)
-# test_df['assets_id'] = test_df['assets_id'].apply(lambda x: str(x).replace("[", '').replace("]", '').replace("'", ''))
-# test_df['asset_os'] = test_df.assets_id.apply(get_assets_os)
-# test_df.groupby('asset_os').agg({'events_count': 'mean', 'crit_rate': 'mean'})
-#
+ # задание 3
+
+import requests
+
+API_URL = 'https://d5d9e0b83lurt901t9ue.apigw.yandexcloud.net'
+
+
+ # в инцидентах, имеющих несколько ассетов ассеты не разделяются, т.к. с точки зрения предметной области разумно выделить в отдельную категорию инциденты, затрагивающие несколько типов систем сразу
+
+def get_assets_os(assets_id):
+    assets_os = set()
+    for asset_id in assets_id.split(','):
+        response = requests.get(f'{API_URL}/get-asset-by-id', params={'asset-id': asset_id}).json().get('result',{})
+        assets_os.add(response.get('os'))
+    return str(assets_os)
+
+# to reduce requests count
+test_df = df.head(100)
+test_df.loc[:, 'assets_id'] = test_df['assets_id'].apply(lambda x: str(x).replace("[", '').replace("]", '').replace("'", ''))
+test_df.loc[:, 'asset_os'] = test_df.assets_id.apply(get_assets_os)
+result = test_df.groupby('asset_os').agg({'events_count': 'mean', 'crit_rate': 'mean'})
+
+print(result)
+
 # # ЗАДАНИЕ 4
 # df['start_time'] = pd.to_datetime(df.start_time)
 # df['end_time'] = pd.to_datetime(df.end_time)
